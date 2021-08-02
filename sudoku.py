@@ -189,12 +189,13 @@ class App(Tk):
                     if self.sv[i][j].get() == "":
                         self.sv[i][j].set(self.solution[i][j])
         elif action == "Hint":
-            hint_given = False
-            while not hint_given:
+            entry_sample = np.random.choice(range(81), 81)
+            pos = {(x//9,x%9) for x in entry_sample}
+            for i, j in pos:
                 i, j = np.random.choice(range(9),size=2,replace=True)
                 if self.sv[i][j].get() == "":
                     self.sv[i][j].set(self.solution[i][j])
-                    hint_given = True
+                    break
         else:
             pass
 
