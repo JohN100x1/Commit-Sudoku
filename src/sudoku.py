@@ -1,7 +1,10 @@
+import logging
 import random
 from tkinter import Button, Entry, LabelFrame, StringVar, Tk
 
 DIGITS = {str(i) for i in range(1, 11)}
+
+logger = logging.getLogger(__name__)
 
 
 class SudokuApp(Tk):
@@ -9,7 +12,7 @@ class SudokuApp(Tk):
         super().__init__()
         self.title("Sudoku")
 
-        # Solved Board
+        logger.info("Creating Solution box")
         self.solution = [["" for j in range(9)] for i in range(9)]
 
         # String Variables for all entry boxes

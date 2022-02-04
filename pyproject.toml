@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sudoku"
-version = "0.1.0"
+version = "0.1.2"
 description = "Simple Sudoku App"
 authors = ["JohN100x1@hotmail.co.uk"]
 
@@ -9,6 +9,7 @@ python = "^3.10"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
+isort = "^5.10.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
