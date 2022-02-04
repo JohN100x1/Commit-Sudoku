@@ -15,7 +15,7 @@ class SudokuApp(Tk):
         logger.info("Creating Solution box")
         self.solution = [["" for j in range(9)] for i in range(9)]
 
-        # String Variables for all entry boxes
+        logger.info("Creating String Variables")
         self.sv = [[StringVar() for j in range(9)] for i in range(9)]
         for i in range(9):
             for j in range(9):
@@ -23,7 +23,7 @@ class SudokuApp(Tk):
                     "w", lambda name, index, mode, x=i, y=j: self.detect(x, y)
                 )
 
-        # Creating Frames
+        logger.info("Creating Frames")
         self.frames = []
         self.headers = ["Sudoku Board", "Actions"]
         for i, header in enumerate(self.headers):
@@ -195,8 +195,7 @@ class SudokuApp(Tk):
         elif action == "Hint":
             entry_sample = random.sample(range(81), 81)
             pos = {(x // 9, x % 9) for x in entry_sample}
-            for _ in pos:
-                i, j = random.choices(range(9), k=2)
+            for i, j in pos:
                 if self.sv[i][j].get() == "":
                     self.sv[i][j].set(self.solution[i][j])
                     break
@@ -205,5 +204,7 @@ class SudokuApp(Tk):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level="DEBUG")
+
     app = SudokuApp()
     app.mainloop()
