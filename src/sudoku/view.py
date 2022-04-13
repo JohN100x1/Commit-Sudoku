@@ -4,6 +4,8 @@ from random import shuffle
 from tkinter import Entry, Event, LabelFrame, StringVar
 from typing import Optional
 
+from sudoku.logic import SudokuLogic
+
 DIGITS = {str(i) for i in range(1, 11)}
 
 

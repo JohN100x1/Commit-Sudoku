@@ -1,7 +1,7 @@
 import logging
 from tkinter import Button, LabelFrame, Tk
 
-from board import SudokuBoard
+from view import SudokuBoard
 
 logger = logging.getLogger(__name__)
 
