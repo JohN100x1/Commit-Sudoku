@@ -1,9 +1,16 @@
 import logging
+from enum import Enum
 from tkinter import Button, LabelFrame, Tk
 
 from view import SudokuBoard
 
 logger = logging.getLogger(__name__)
+
+
+class Actions(str, Enum):
+    NEW_GAME = "New Game"
+    SOLVE = "Solve"
+    HINT = "Hint"
 
 
 class SudokuApp(Tk):
@@ -12,21 +19,17 @@ class SudokuApp(Tk):
         self.title("Sudoku")
 
         logger.info("Creating Frames")
-        self.frames = [
-            [LabelFrame(text="Sudoku Board")],
-            [LabelFrame(text="Actions")],
-        ]
 
         self.board = SudokuBoard()
         self.actions = LabelFrame(text="Actions")
 
         # Creating Actions Buttons
         self.buttons = []
-        for i, action in enumerate(["New Game", "Solve", "Hint"]):
+        for i, action in enumerate(Actions):
             self.buttons.append(
                 Button(
                     self.actions,
-                    text=action,
+                    text=action.value,
                     padx=10,
                     pady=5,
                     command=lambda x=action: self.button_action(x),
@@ -39,14 +42,14 @@ class SudokuApp(Tk):
         # Generate Board and GUI
         self.board.generate()
 
-    def button_action(self, action: str):
-        if action == "New Game":
-            self.board.generate()
+    def button_action(self, action: Actions):
+        if action == Actions.NEW_GAME:
+            self.board.generate(None, 17)
 
-        elif action == "Solve":
+        elif action == Actions.SOLVE:
             self.board.solve()
 
-        elif action == "Hint":
+        elif action == Actions.HINT:
             self.board.hint()
 
         else:
@@ -54,7 +57,7 @@ class SudokuApp(Tk):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level="DEBUG")
+    logging.basicConfig(level="INFO")
 
     app = SudokuApp()
     app.mainloop()
