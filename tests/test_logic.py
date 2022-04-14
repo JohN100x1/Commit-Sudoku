@@ -8,6 +8,49 @@ def logic():
     return SudokuLogic()
 
 
+@pytest.fixture
+def sample_logic():
+    logic = SudokuLogic()
+    logic.board = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 3, 0, 0, 0, 0, 0, 0],
+        [0, 3, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 8, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 9, 0, 0, 0, 0],
+    ]
+    return logic
+
+
+class TestSudokuLogicGenerate:
+    """Test SudokuLogic.generate."""
+
+    def test_generate_with_seed(self, logic, sample_logic):
+        seed = 1234567890
+        keep_pos = logic.generate(seed, 5)
+        assert keep_pos == {(6, 2), (8, 4), (3, 1), (2, 2), (8, 2)}
+        assert logic.board == sample_logic.board
+
+
+class TestSudokuLogicPossible:
+    """Test SudokuLogic.possible."""
+
+    def test_possible(self, sample_logic):
+        assert sample_logic.possible(2, 8, 1) is True
+
+    def test_col_exclude(self, sample_logic):
+        assert sample_logic.possible(3, 8, 1) is False
+
+    def test_row_exclude(self, sample_logic):
+        assert sample_logic.possible(9, 8, 1) is False
+
+    def test_box_exclude(self, sample_logic):
+        assert sample_logic.possible(8, 8, 1) is False
+
+
 class TestSudokuLogicIterateBoard:
     """Test SudokuLogic.iterate_board."""
 
