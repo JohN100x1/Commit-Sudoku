@@ -40,12 +40,10 @@ class SudokuLogic:
         """Reset the entire board."""
         for i, j in self.iterate_board():
             self.board[i][j] = 0
-            self.solution[i][j] = 0
 
     def fill_board(self):
         """Fill the entire board with the solution board."""
-        for i, j in self.iterate_board():
-            self.board[i][j] = self.solution[i][j]
+        self.board = deepcopy(self.solution)
 
     def possible(self, digit: int, i: int, j: int) -> bool:
         """
@@ -96,8 +94,13 @@ class SudokuLogic:
                 self.board[i][j] = 0
         return False
 
-    def generate(self, seed: Optional[int] = None, num_clues: int = 17):
-        """Randomly generate a new board for given seed and number of clues."""
+    def generate(
+        self, seed: Optional[int] = None, num_clues: int = 17
+    ) -> set[tuple[int, int]]:
+        """
+        Randomly generate a new board for given seed and number of clues.
+        Return the positions of the clues.
+        """
         # Set Seed if specified
         if seed is not None:
             random_seed(seed)
@@ -118,13 +121,11 @@ class SudokuLogic:
                 self.board[i][j] = 0
         if solved:
             logger.info("Board Generated.")
-            return
-        raise Exception("Unknown Error occurred while generating board.")
+        return keep_pos
 
-    def hint(self):
-        """Randomly fill solution in the first empty position on the board."""
+    def get_hint(self) -> tuple[int, int, int]:
+        """Randomly get solution for the first empty position on the board."""
         random_pos = [(x // 9, x % 9) for x in sample(range(81), 81)]
         for i, j in random_pos:
             if self.board[i][j] == 0:
-                self.board[i][j] = self.solution[i][j]
-                break
+                return i, j, self.solution[i][j]
