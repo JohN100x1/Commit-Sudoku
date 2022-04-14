@@ -2,7 +2,7 @@ import logging
 from enum import Enum
 from tkinter import Button, LabelFrame, Tk
 
-from view import SudokuBoard
+from sudoku.view import SudokuBoard
 
 logger = logging.getLogger(__name__)
 
