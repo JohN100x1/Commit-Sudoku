@@ -91,15 +91,15 @@ class SudokuBoard:
         if digit not in self.DIGITS:
             self.sv[i][j].set("")
             self.logic.board[i][j] = 0
-        else:
-            self.sv[i][j].set(digit)
-            self.logic.board[i][j] = int(digit)
+            return
+        self.sv[i][j].set(digit)
+        self.logic.board[i][j] = int(digit)
 
-        # Detect incorrect digit
-        if not self.logic.possible(int(digit), i, j) and digit != "":
-            self.entries[i][j]["bg"] = self.COLOUR_WRONG
-        else:
+        # Detect correct digits
+        if self.logic.possible(int(digit), i, j):
             self.entries[i][j]["bg"] = self.COLOUR_RIGHT
+        else:
+            self.entries[i][j]["bg"] = self.COLOUR_WRONG
 
     def highlight(self, event: Event, i: int, j: int):
         """When an entry is clicked, re-colour cells."""
@@ -121,6 +121,6 @@ class SudokuBoard:
                 self.entries[row][col]["bg"] = self.COLOUR_DEFAULT
 
             # Colour cells which are invalid
-            if digit := self.entries[row][col].get() != "":
-                if not self.logic.possible(int(digit), row, col):
-                    self.entries[row][col]["bg"] = self.COLOUR_WRONG
+            digit = self.entries[row][col].get()
+            if digit != "" and not self.logic.possible(int(digit), row, col):
+                self.entries[row][col]["bg"] = self.COLOUR_WRONG

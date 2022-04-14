@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 
 class SudokuLogic:
     def __init__(self):
-        empty_board = [[0 for _ in range(9)] for _ in range(9)]
-        self.board: list[list[int]] = deepcopy(empty_board)
-        self.solution: list[list[int]] = deepcopy(empty_board)
+        self.empty = [[0 for _ in range(9)] for _ in range(9)]
+        self.board: list[list[int]] = deepcopy(self.empty)
+        self.solution: list[list[int]] = deepcopy(self.empty)
 
     @staticmethod
     def iterate_board() -> Generator[tuple[int, int], None, None]:
@@ -38,8 +38,7 @@ class SudokuLogic:
 
     def reset_board(self):
         """Reset the entire board."""
-        for i, j in self.iterate_board():
-            self.board[i][j] = 0
+        self.board = deepcopy(self.empty)
 
     def fill_board(self):
         """Fill the entire board with the solution board."""
