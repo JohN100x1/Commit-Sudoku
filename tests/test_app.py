@@ -1,11 +1,9 @@
-import os
+import sys
 
 import pytest
 
 from sudoku.app import Actions, SudokuApp
 from sudoku.view import SudokuBoard
-
-os.environ["DISPLAY"] = "unix$DISPLAY"
 
 
 @pytest.fixture
@@ -13,6 +11,7 @@ def app():
     return SudokuApp()
 
 
+@pytest.mark.skipif(sys.platform != "win32", reason="Windows tests")
 class TestSudokuAppButtonAction:
     """Test SudokuApp.button_action."""
 
