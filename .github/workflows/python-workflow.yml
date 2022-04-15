@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure Display Settings
-        run: export DISPLAY=:0
+        run: export DISPLAY=0
 
       - name: Checkout Code
         uses: actions/checkout@v3
