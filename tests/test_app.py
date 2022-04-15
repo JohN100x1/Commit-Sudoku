@@ -1,24 +1,38 @@
+from unittest.mock import Mock
+
+import pytest
+
 from sudoku.app import Actions, SudokuApp
 from sudoku.view import SudokuBoard
+
+
+@pytest.fixture
+def app():
+    return SudokuApp()
 
 
 class TestSudokuAppButtonAction:
     """Test SudokuApp.button_action."""
 
-    def test_generate_board(self, mocker):
+    def test_generate_board(self, mocker, app):
         mock = mocker.spy(SudokuBoard, "generate")
-        app = SudokuApp()
         app.button_action(Actions.NEW_GAME)
-        assert mock.call_count == 2
+        assert mock.call_count == 1
 
-    def test_solve_board(self, mocker):
+    def test_solve_board(self, mocker, app):
         mock = mocker.spy(SudokuBoard, "solve")
-        app = SudokuApp()
         app.button_action(Actions.SOLVE)
         assert mock.call_count == 1
 
-    def test_hint_board(self, mocker):
+    def test_hint_board(self, mocker, app):
         mock = mocker.spy(SudokuBoard, "hint")
-        app = SudokuApp()
         app.button_action(Actions.HINT)
         assert mock.call_count == 1
+
+
+class TestSudokuAppSudokuBoardHighlight:
+    """Test SudokuApp.board.highlight."""
+
+    def test_highlight(self, app):
+        # TODO: improve this test
+        app.board.highlight(Mock(), 0, 0)

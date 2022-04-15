@@ -103,6 +103,7 @@ class SudokuBoard:
 
     def highlight(self, event: Event, i: int, j: int):
         """When an entry is clicked, re-colour cells."""
+        logger.debug(f"{event} Event on cell ({i}, {j})")
         for row, col in self.logic.iterate_board():
             # The selected cell
             if row == i and col == j:
