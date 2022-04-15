@@ -7,6 +7,9 @@ jobs:
     name: Setup Python Poetry Project
     runs-on: ubuntu-latest
     steps:
+      - name: Install Display Settings
+        run: sudo apt-get install x11-xserver-utils
+
       - name: Checkout Code
         uses: actions/checkout@v3
 
