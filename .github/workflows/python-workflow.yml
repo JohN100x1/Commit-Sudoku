@@ -7,6 +7,9 @@ jobs:
     name: Setup Python Poetry Project
     runs-on: ubuntu-latest
     steps:
+      - name: Configure Display Settings
+        uses: export DISPLAY=:0
+
       - name: Checkout Code
         uses: actions/checkout@v3
 
