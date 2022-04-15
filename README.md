@@ -4,4 +4,4 @@
 A simple Sudoku app made with Tkinter.
 - `New Game`: Generates a new Sudoku board.
 - `Solve`: Solves the current Sudoku board.
-- `Hint`: Gives one of the answers on the Sudoku board.
+- `Hint`: Fills in one of the answers on the Sudoku board.
