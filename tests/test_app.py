@@ -5,7 +5,7 @@ import pytest
 from sudoku.app import Actions, SudokuApp
 from sudoku.view import SudokuBoard
 
-os.environ["DISPLAY"] = "0"
+os.environ["DISPLAY"] = "unix$DISPLAY"
 
 
 @pytest.fixture
