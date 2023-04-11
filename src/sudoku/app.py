@@ -1,5 +1,5 @@
 import logging
-from enum import Enum
+from enum import StrEnum
 from tkinter import Button, LabelFrame, Tk
 
 from sudoku.view import SudokuBoard
@@ -7,7 +7,7 @@ from sudoku.view import SudokuBoard
 logger = logging.getLogger(__name__)
 
 
-class Actions(str, Enum):
+class Actions(StrEnum):
     NEW_GAME = "New Game"
     SOLVE = "Solve"
     HINT = "Hint"
