@@ -29,7 +29,7 @@ class SudokuApp(Tk):
             self.buttons.append(
                 Button(
                     self.actions,
-                    text=action.value,
+                    text=action,
                     padx=10,
                     pady=5,
                     command=lambda x=action: self.button_action(x),

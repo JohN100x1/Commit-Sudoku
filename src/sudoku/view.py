@@ -18,7 +18,6 @@ class SudokuBoard:
     COLOUR_DEFAULT = "#FFFFFF"
 
     def __init__(self):
-
         self.logic = SudokuLogic()
 
         # Create StringVar for each cell on Sudoku Board
